@@ -80,3 +80,42 @@ var uri = new Uri("http://github.com");
 Guard.With(uri, "Website").Must(value => value.IsAbsolute).ThrowIfError();
 Guard.With(uri, "Website").MustNot(value => value.IsRelative).ThrowIfError();
 ```
+
+## Supported guard clauses
+
+``` csharp
+// General purpose
+Must<T>(Func<T, bool> predicate)
+MustNot<T>(Func<T, bool> predicate)
+NotDefault<T>()
+NotNull<T>()
+NotNullOrEmpty<T>()
+
+// IComparable (int, decimal, float, datetime, etc)
+GreaterThan<T>(T minValue)
+GreaterThanOrEqualTo<T>(T minValue)
+LessThan<T>(T maxValue)
+LessThanOrEqualTo<T>(T maxValue)
+Negative<T>()
+NegativeOrZero<T>()
+NotGreaterThan<T>(T maxValue)
+NotGreaterThanNorEqualTo(T maxValue)
+NotLessThan<T>(T minValue)
+NotLessThanNorEqualTo<T>(T minValue)
+NotInRange<T>(T from, T to, bool exclusive)
+NotNegative<T>()
+NotNegativeNorZero<T>()
+NotOutOfRange<T>(T from, T to, bool inclusive)
+
+// DateTime
+NotOutOfSqlDateRange()
+
+// String
+MaxLength(int maxLength)
+MinLength(int minLength)
+Length(int minLength, int maxLength)
+NotNullOrEmpty()
+NotNullOrWhiteSpace()
+Match(pattern, RegexOptions options)
+NotMatch(pattern, RegexOptions options)
+```
