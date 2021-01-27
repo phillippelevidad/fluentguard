@@ -5,6 +5,11 @@ namespace FluentGuard
 {
     public static class GuardClauseStringExtensions
     {
+        public static IGuardClauseWithInput<string> MaxLength(this IGuardClauseWithInput<string> guardClause, int maxLength, string? errorMessage = null)
+        {
+            return guardClause.Length(int.MinValue, maxLength, errorMessage);
+        }
+
         public static IGuardClauseWithInput<string> MinLength(this IGuardClauseWithInput<string> guardClause, int minLength, string? errorMessage = null)
         {
             return guardClause.Length(minLength, int.MaxValue, errorMessage);
