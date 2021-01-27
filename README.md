@@ -4,7 +4,7 @@ FluentGuard is a validation framework with a fluent interface.
 
 It's meant to be quick and easy to validate multiple properties on a model with as little code as possible.
 
-But it's also meant to be flexible and powerful, giving you the option to throw exceptions on error, perform an action upon success or simply return the result object, that can latter be converted into `ModelState`, `BadRequest` and `ProblemDetails` in APIs and so much more.
+But it's also meant to be flexible and powerful, giving you the option to throw exceptions on error, perform an action upon success or simply return the result object, which can later be converted into a `ModelState`, `BadRequest` and `ProblemDetails` in APIs and so much more.
 
 ## Basic usage
 
@@ -33,7 +33,7 @@ person.Age.ShouldBe(30);
 
 ## IGuardResult<T> and Errors
 
-With the `IGuardResult<T>` interface, you have the option to inspect the results after all validations have taken place an take further action, instead of throwing an exception right away.
+With the `IGuardResult<T>` interface, you have the option to inspect the results after all validations have taken place and take further action, instead of throwing an exception right away.
 
 ``` csharp
 public interface IGuardResult<T>
@@ -45,7 +45,7 @@ public interface IGuardResult<T>
 }
 ```
 
-Upon failure, each guard clause stores its error both as a simple string and a full exception with the parameter name, making it easy to return a friendly message to the user, bubble exceptions or convert the errors to another object type.
+Upon failure, each guard clause stores its error both as a simple string and a full exception with the parameter name, making it easy to return a friendly message to the user, bubble exceptions or convert the errors to another object type, like AspNet MVC's ModelState or ProblemDetails.
 
 ``` csharp
 public class Errors : List<KeyValuePair<string, Exception>>
@@ -82,6 +82,8 @@ Guard.With(uri, "Website").MustNot(value => value.IsRelative).ThrowIfError();
 ```
 
 ## Supported guard clauses
+
+These are the ones that come out of the box:
 
 ``` csharp
 // General purpose
